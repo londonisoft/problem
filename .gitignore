@@ -10,7 +10,6 @@ yarn-error.log
 .vscode
 .idea
 /public/img
-/storage/framework/*
 /public/abasvumi/uploads/images
 /public/abasvumi/uploads/properties
 .history
