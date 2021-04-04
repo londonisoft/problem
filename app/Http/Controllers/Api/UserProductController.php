@@ -54,7 +54,7 @@ class UserProductController extends Controller
             ]);
         } else {
             DB::beginTransaction();
-            try {
+            
                 
                 $product                         = new Product();
                 $product->external_user_id       = auth()->user()->id;
@@ -88,15 +88,7 @@ class UserProductController extends Controller
                     ]);
                 }
 
-            } catch (\Exception $ex) {
-                DB::rollBack();
-
-                return response()->json([
-                    'success'      => false,
-                    'status_code'  => 500,
-                    'message'        => $ex,
-                ]);
-            }
+            
         }
         
     }
