@@ -1,0 +1,17 @@
+/node_modules
+/vendor
+/public/hot
+/storage/*.key
+.phpunit.result.cache
+docker-compose.override.yml
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+.vscode
+.idea
+/public/img
+/storage/framework/*
+/public/abasvumi/uploads/images
+/public/abasvumi/uploads/properties
+.history
