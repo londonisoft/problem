@@ -138,5 +138,6 @@ Route::group(['prefix'=>'/external-user'], function(){
     Route::get('/developers/view/{id}', [ExternalUserController::class, 'developerView']);
     Route::get('/developers/properties/{id}', [ExternalUserController::class, 'developerProperty']);
     Route::get('/suppliers', [ExternalUserController::class, 'suppliers'])->name('ExternalUser.suppliers');
+    Route::get('/favorite', [ExternalUserController::class, 'favorite']);
 });
 

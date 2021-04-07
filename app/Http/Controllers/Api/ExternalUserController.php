@@ -148,4 +148,14 @@ class ExternalUserController extends Controller
             'data'        => $properties,
         ]);
     }
+    public function favorite (Request $request) {
+        $query = Property::with('images:property_id,image,image_type_id');            
+        $query->whereIn('id',$request->id);
+        $properties = $query->get();
+
+        return response()->json([
+            'status_code' => 200,
+            'data'        => $properties,
+        ]);
+    }
 }
