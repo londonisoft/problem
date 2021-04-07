@@ -32,7 +32,7 @@ class PropertyController extends Controller
      */
     public function index(Request $request) {
         try{
-            $query = Property::with('images:property_id,image,image_type_id');
+            $query = Property::select('id','price','title','bn_title','district_id','division_id','thana_id','garage','balcony','address_bn','address','beds','baths','sqft','created_at')->with('images:property_id,image,image_type_id');
 //                    ->leftJoin('service_types','service_types.id','services.service_type_id')
 //                    ->leftJoin('divisions','divisions.id','services.division_id')
 //                    ->leftJoin('districts','districts.id','services.district_id')
@@ -181,7 +181,7 @@ class PropertyController extends Controller
         $status = $request->status;
         $category = $request->category;
         if ($status == 'featured') {
-            $query = Property::with('images:property_id,image,image_type_id')->orderBy('id', 'desc');
+            $query = Property::select('id','price','price','address_bn','address','beds','baths','sqft','created_at')->with('images:property_id,image,image_type_id')->orderBy('id', 'desc');
             $services = $query->take(4)->get();
             return response()->json([
                 'status_code' => 200,
@@ -194,7 +194,7 @@ class PropertyController extends Controller
         $status = $request->status;
         $category = $request->category;
         if ($status == 'featured') {
-            $query = Property::with('images:property_id,image,image_type_id')->orderBy('id', 'desc');
+            $query = Property::select('id','price','price','address_bn','address','beds','baths','sqft','created_at')->with('images:property_id,image,image_type_id')->orderBy('id', 'desc');
             $services = $query->take(4)->get();
             return response()->json([
                 'status_code' => 200,
@@ -203,11 +203,11 @@ class PropertyController extends Controller
         }
         if ($status == 'latest') {
             if ($category === 'sale') {
-                $query = Property::with('images:property_id,image,image_type_id')->where('purpose', 1)->orderBy('id', 'desc');
+                $query = Property::select('id','price','price','address_bn','address','beds','baths','sqft','created_at')->with('images:property_id,image,image_type_id')->where('purpose', 1)->orderBy('id', 'desc');
             } elseif ($category === 'rent') {
-                $query = Property::with('images:property_id,image,image_type_id')->where('purpose', 2)->orderBy('id', 'desc');
+                $query = Property::select('id','price','price','address_bn','address','beds','baths','sqft','created_at')->with('images:property_id,image,image_type_id')->where('purpose', 2)->orderBy('id', 'desc');
             } else {
-                $query = Property::with('images:property_id,image,image_type_id')->orderBy('id', 'desc');
+                $query = Property::select('id','price','price','address_bn','address','beds','baths','sqft','created_at')->with('images:property_id,image,image_type_id')->orderBy('id', 'desc');
             }
             
             $services = $query->take(10)->get();

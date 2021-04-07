@@ -49,9 +49,13 @@ Route::get('/common', function() {
 Route::get('/frontend-data', function() {
     return response()->json([
         'status_code' => 200,
-        'developers' => \App\Lib\Frontend::developers(),
-        'agents' => \App\Lib\Frontend::agents(),
-        'suppliers' => \App\Lib\Frontend::suppliers()
+        'featuredPropertyList' => \App\Lib\Frontend::featuredPropertyList(),
+        'dhakaNeiborList' => \App\Lib\Frontend::dhakaNeiborList(),
+        'latestPropertyList' => \App\Lib\Frontend::latestPropertyList(),
+        'popularPlaceList' => \App\Lib\Frontend::popularPlaceList(),
+        'homeAgentList' => \App\Lib\Frontend::homeAgentList(),
+        'homeTestimonialList' => \App\Lib\Frontend::homeTestimonialList(),
+        'homeBrandList' => \App\Lib\Frontend::homeBrandList()
         ]);
 });
 
