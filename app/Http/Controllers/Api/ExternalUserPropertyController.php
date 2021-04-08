@@ -324,7 +324,7 @@ class ExternalUserPropertyController extends Controller
         $img->insert('ab.png', 'center');
         $img->save($image_name);
         $property_image->image  = $image_name;
-        $property_image->update();
+        $property_image->save();
         
 
         return response()->json([
@@ -348,7 +348,7 @@ class ExternalUserPropertyController extends Controller
         $img->insert('ab.png', 'center');
         $img->save($image_name);
         $property_image->image  = $image_name;
-        $property_image->update();
+        $property_image->save();
 
         return response()->json([
             'success'   => true,
