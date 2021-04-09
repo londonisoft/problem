@@ -317,6 +317,7 @@ class ExternalUserPropertyController extends Controller
         $image_ext = strtolower($request->image->getClientOriginalExtension());
         $image_name = "abasvumi/uploads/properties/property_" . time() . rand() . "." . $image_ext;   
         $img = Image::make($request->file('image')->getRealPath());
+        $img->resize(760, 486);
         $img->insert('ab.png', 'center');
         $img->save($image_name);
         $property_image->image  = $image_name;
@@ -341,6 +342,7 @@ class ExternalUserPropertyController extends Controller
         $image_ext = strtolower($request->image->getClientOriginalExtension());
         $image_name = "abasvumi/uploads/properties/property_" . time() . rand() . "." . $image_ext;   
         $img = Image::make($request->file('image')->getRealPath());
+        $img->resize(760, 486);
         $img->insert('ab.png', 'center');
         $img->save($image_name);
         $property_image->image  = $image_name;

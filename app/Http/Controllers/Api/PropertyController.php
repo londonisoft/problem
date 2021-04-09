@@ -176,6 +176,16 @@ class PropertyController extends Controller
         ]);
     }
 
+    public function getSimilarProperty($type)
+    {
+        $query = Property::select('id','price','price','address_bn','address','beds','baths','sqft','created_at')->with('images:property_id,image,image_type_id')->orderBy('id', 'desc');
+        $properties = $query->where('property_type', $type)->take(9)->get();
+        return response()->json([
+            'status_code' => 200,
+            'data'        => $properties,
+        ]);
+        
+    }
     public function propertyByStatus(Request $request)
     {
         $status = $request->status;
