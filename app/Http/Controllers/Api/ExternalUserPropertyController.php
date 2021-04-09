@@ -70,7 +70,6 @@ class ExternalUserPropertyController extends Controller
             'baths'           => 'required',
             'garage'          => 'required',
             'balcony'         => 'required',
-            'video_link'      => 'required',
             'property_type'    => 'required',
             'purpose'         => 'required',
         ],[
@@ -92,7 +91,6 @@ class ExternalUserPropertyController extends Controller
             'baths.required'       => 'Blobathsck is required',
             'garage.required'      => 'Garage is required',
             'balcony.required'     => 'Balcony is required',
-            'video_link.required'  => 'Video link is required',
             'property_type.required' => 'Property type is required',
             'purpose.required'     => 'Purpose is required',
         ]);
@@ -201,7 +199,6 @@ class ExternalUserPropertyController extends Controller
             'baths'           => 'required',
             'garage'          => 'required',
             'balcony'         => 'required',
-            'video_link'      => 'required',
             'property_type'    => 'required',
             'purpose'         => 'required',
         ],[
@@ -223,7 +220,6 @@ class ExternalUserPropertyController extends Controller
             'baths.required'       => 'Blobathsck is required',
             'garage.required'      => 'Garage is required',
             'balcony.required'     => 'Balcony is required',
-            'video_link.required'  => 'Video link is required',
             'property_type.required' => 'Property type is required',
             'purpose.required'     => 'Purpose is required',
         ]);
