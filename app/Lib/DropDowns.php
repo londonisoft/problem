@@ -43,7 +43,7 @@ class DropDowns
         return DB::table('service_types')->select('id','name as text_en','bn_name as text_bn')->get();
     }
     public static function areas(){
-        return DB::table('areas')->select('id','name as text_en','bn_name as text_bn', 'address', 'address_bn')->get();
+        return DB::table('areas')->select('id','name as text_en','bn_name as text_bn', 'address', 'address_bn','image')->get();
     }
     public static function blocks(){
         return DB::table('blocks')->select('id','name as text_en','bn_name as text_bn')->get();
