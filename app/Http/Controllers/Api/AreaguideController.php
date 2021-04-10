@@ -10,8 +10,10 @@ class AreaguideController extends Controller
 {
     public function DhakaNeiborList(Request $request) {
         try{
-            $data =  AreaGuide::get()
-        }catch (Exception $error) {
+            
+            $data =  AreaGuide::get();
+
+        } catch (\Exception $error) {
             return response()->json([
                 'success'   => false,
                 'message'  => 'Data not found.',
