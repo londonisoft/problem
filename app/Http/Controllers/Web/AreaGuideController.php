@@ -112,8 +112,10 @@ class AreaGuideController extends Controller
     
                 if($request->image){
     
-                    unlink($areaGuide->image);
-    
+                    if(($areaGuide->image != null) && file_exists($areaGuide->image)){
+                        unlink($areaGuide->image);
+                    }
+            
                     $file_info = $request->file('image');
                     $image_ext = strtolower($file_info->getClientOriginalExtension());
                     $image_name = "education_" . time() . rand() . "." . $image_ext;                
