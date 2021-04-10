@@ -8,10 +8,10 @@ use App\Models\AreaGuide;
 
 class AreaguideController extends Controller
 {
-    public function areaGuideList(Request $request) {
+    public function areaGuideList($id) {
         try{
 
-            $data =  AreaGuide::get();
+            $data =  AreaGuide::where('area_id', $id)->get();
 
         } catch (\Exception $error) {
             return response()->json([

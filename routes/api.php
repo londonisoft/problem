@@ -67,7 +67,7 @@ Route::get('/popular-place', [PropertyController::class, 'popularPlace']);
 Route::get('/home/agent', [PropertyController::class, 'homeAgent']);
 Route::get('/home/testimonial', [PropertyController::class, 'homeTestimonial']);
 Route::get('/home/brands', [PropertyController::class, 'homeBrand']);
-Route::get('/guide-list', [AreaguideController::class, 'areaGuideList']);
+Route::get('/guide-list/{id}', [AreaguideController::class, 'areaGuideList']);
 
 // for porduct route
 Route::get('/products', [ProductController::class, 'index']);
