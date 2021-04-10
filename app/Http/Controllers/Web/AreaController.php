@@ -87,9 +87,9 @@ class AreaController extends Controller
             $area->address_bn      = $request->address_bn;
 
             if($request->image){
-
-                unlink($area->image);
-
+                if(($area->image != null) && file_exists($area->image)){
+                    unlink($area->image);
+                }
                 $file_info = $request->file('image');
                 $image_ext = strtolower($file_info->getClientOriginalExtension());
                 $image_name = "education_" . time() . rand() . "." . $image_ext;                
