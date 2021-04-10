@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\DhakaNeibor;
 use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\Api\AreaguideController;
 use Illuminate\Support\Facades\Route;
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -66,7 +67,7 @@ Route::get('/popular-place', [PropertyController::class, 'popularPlace']);
 Route::get('/home/agent', [PropertyController::class, 'homeAgent']);
 Route::get('/home/testimonial', [PropertyController::class, 'homeTestimonial']);
 Route::get('/home/brands', [PropertyController::class, 'homeBrand']);
-Route::get('/guide-list', [PropertyController::class, 'homeBrand']);
+Route::get('/guide-list', [AreaguideController::class, 'areaGuideList']);
 
 // for porduct route
 Route::get('/products', [ProductController::class, 'index']);

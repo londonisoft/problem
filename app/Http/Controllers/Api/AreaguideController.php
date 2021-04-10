@@ -8,9 +8,9 @@ use App\Models\AreaGuide;
 
 class AreaguideController extends Controller
 {
-    public function DhakaNeiborList(Request $request) {
+    public function areaGuideList(Request $request) {
         try{
-            
+
             $data =  AreaGuide::get();
 
         } catch (\Exception $error) {
