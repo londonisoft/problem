@@ -12,7 +12,7 @@ class BlogController extends Controller
     public function categories() {
         try{
 
-            $data =  Category::get();
+            $data =  Category::orderBy('id', 'desc')->get();
 
         } catch (\Exception $error) {
             return response()->json([
@@ -38,7 +38,7 @@ class BlogController extends Controller
                 $data->where('category_id', $id);
             }
 
-            $data = $data->get();
+            $data = $data->orderBy('id', 'desc')->get();
 
         } catch (\Exception $error) {
             return response()->json([
