@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\DhakaNeibor;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\AreaguideController;
+use App\Http\Controllers\Api\BlogController;
 use Illuminate\Support\Facades\Route;
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
