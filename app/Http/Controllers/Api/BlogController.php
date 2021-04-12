@@ -32,8 +32,8 @@ class BlogController extends Controller
     public function blog($id) {
         try{
 
-            $data =  Category::query();
-            
+            $data =  Blog::query();
+
             if ($id) {
                 $data->where('category_id', $id);
             }
