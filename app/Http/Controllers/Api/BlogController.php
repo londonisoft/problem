@@ -38,7 +38,7 @@ class BlogController extends Controller
                 $data->where('category_id', $id);
             }
 
-            return $data->get();
+            $data = $data->get();
 
         } catch (\Exception $error) {
             return response()->json([
