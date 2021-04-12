@@ -68,6 +68,8 @@ Route::get('/home/agent', [PropertyController::class, 'homeAgent']);
 Route::get('/home/testimonial', [PropertyController::class, 'homeTestimonial']);
 Route::get('/home/brands', [PropertyController::class, 'homeBrand']);
 Route::get('/guide-list/{id}', [AreaguideController::class, 'areaGuideList']);
+Route::get('/blog-categories', [BlogController::class, 'categories']);
+Route::get('/blog-list/{id}', [BlogController::class, 'blog']);
 
 // for porduct route
 Route::get('/products', [ProductController::class, 'index']);
