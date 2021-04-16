@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\DhakaNeibor;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\AreaguideController;
 use App\Http\Controllers\Api\BlogController;
+use App\Http\Controllers\Api\HomeLoanController;
 use Illuminate\Support\Facades\Route;
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -24,6 +25,7 @@ Route::post('/external-user/register', [AuthController::class, 'ExternalUserRegi
 Route::post('/external-user/otp-verify', [AuthController::class, 'verifyOtp'])->name('external-user.otp');
 Route::post('/external-user/login', [AuthController::class, 'ExternalUserLogin'])->name('external-user.login');
 Route::post('/contact/store', [ContactController::class, 'store'])->name('contact.store');
+Route::post('/loan/store', [HomeLoanController::class, 'store']);
 
 Route::get('/common', function() {
     return response()->json([
