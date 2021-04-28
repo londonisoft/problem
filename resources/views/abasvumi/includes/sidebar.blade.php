@@ -47,6 +47,12 @@
                             <p>Brand</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ url('admin/slider') }}" class="nav-link nav-slider">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Sliders</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item has-treeview common-service">

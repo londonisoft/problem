@@ -47,7 +47,8 @@ Route::get('/common', function() {
         'unitList' => \App\Lib\DropDowns::unitList(),
         'setting' => \App\Lib\DropDowns::sertting(),
         'propertyTypeList' => \App\Lib\DropDowns::propertyTypeList(),
-        'sumDataList' => \App\Lib\DropDowns::sumDataList()
+        'sumDataList' => \App\Lib\DropDowns::sumDataList(),
+        'sliderList' => \App\Lib\DropDowns::sliderList()
     ]);
 });
 Route::get('/frontend-data', function() {

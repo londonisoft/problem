@@ -33,6 +33,7 @@ use App\Http\Controllers\Web\SupplierController;
 use App\Http\Controllers\Web\DeveloperController;
 use App\Http\Controllers\Web\SettingController;
 use App\Http\Controllers\Web\BrandController;
+use App\Http\Controllers\Web\SliderController;
 use App\Http\Controllers\Web\CategoryController;
 use App\Http\Controllers\Web\BlogController;
 use App\Http\Controllers\Web\TestimonialController;
@@ -149,6 +150,13 @@ Route::group(['prefix'=>'admin/brand', 'middleware'=>'admin'], function(){
     Route::post('/store',  [BrandController::class, 'store'])->name('brand.store');
     Route::post('/update',  [BrandController::class, 'update'])->name('brand.update');
     Route::post('/destroy',  [BrandController::class, 'destroy'])->name('brand.destroy');
+});
+//route for manage slider
+Route::group(['prefix'=>'admin/slider', 'middleware'=>'admin'], function(){
+    Route::get('/', [SliderController::class, 'index'])->name('slider.index');
+    Route::post('/store',  [SliderController::class, 'store'])->name('slider.store');
+    Route::post('/update',  [SliderController::class, 'update'])->name('slider.update');
+    Route::post('/destroy',  [SliderController::class, 'destroy'])->name('slider.destroy');
 });
 
 //route for manage amenitie

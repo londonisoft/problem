@@ -69,6 +69,9 @@ class DropDowns
     public static function propertyTypeList(){
         return DB::table('property_types')->select('id','name as text_en','bn_name as text_bn','category_id', 'is_menu')->get();
     }
+    public static function sliderList(){
+        return DB::table('sliders')->select('image','id')->get();
+    }
     public static function sumDataList(){
         $all_agent = ExternalUser::where('user_type', 1)->count();
         $all_developers = ExternalUser::where('user_type', 2)->count();
