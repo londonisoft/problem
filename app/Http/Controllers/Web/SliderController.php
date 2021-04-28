@@ -25,7 +25,7 @@ class SliderController extends Controller
     public function store(Request $request) {
         //return $request->type;
         $validators = Validator::make($request->all(),[
-            'image'=> 'required|max:100',
+            'image'=> 'required|max:600',
         ]);
 
         if($validators->fails()) {
@@ -64,7 +64,7 @@ class SliderController extends Controller
     public function update (Request $request) {
         //return $request->all();
         $validators = Validator::make($request->all(),[
-			'image'=> 'required|max:100'
+			'image'=> 'required|max:600'
         ]);
 
         if($validators->fails()) {
