@@ -74,8 +74,9 @@ class PropertyController extends Controller
                 $price = explode(',', $request->price);
                 $from = $price[0];
                 $to = $price[1];
-
-                $query->whereBetween('price', [$from, $to]);
+				if ($from || $to) {
+					$query->whereBetween('price', [$from, $to]);
+				}
             }
             if ($request->baths) {
                 $query->where('baths', $request->baths);
