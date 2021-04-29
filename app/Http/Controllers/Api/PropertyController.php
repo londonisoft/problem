@@ -59,6 +59,10 @@ class PropertyController extends Controller
             if ($request->advanced) {
                 $query->where('advanced', $request->advanced);
             }
+            if ($request->area_id) {
+                $area = explode(',', $request->area);
+                $query->whereIn('area_id ', $area);
+            }
             if ($request->area) {
                 $area = explode(',', $request->area);
                 $from = $area[0];
