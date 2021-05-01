@@ -33,12 +33,6 @@ class PropertyController extends Controller
     public function index(Request $request) {
         try{
             $query = Property::select('id','price','title','bn_title','district_id','division_id','thana_id','garage','balcony','address_bn','address','beds','baths','sqft','created_at')->with('images:property_id,image,image_type_id');
-//                    ->leftJoin('service_types','service_types.id','services.service_type_id')
-//                    ->leftJoin('divisions','divisions.id','services.division_id')
-//                    ->leftJoin('districts','districts.id','services.district_id')
-//                    ->leftJoin('thanas', 'thanas.id','services.thana_id')
-//                    ->select('services.*','service_types.name as service_type_name','divisions.name as division_name','districts.name as district_name','thanas.name as thana_name');
-
             if ($request->filled('sortBy')) {
                 if ($request->sortBy == 1) {
                     $query->orderBy('created_at', 'desc');
@@ -67,8 +61,9 @@ class PropertyController extends Controller
                 $area = explode(',', $request->area);
                 $from = $area[0];
                 $to = $area[1];
-
-                $query->whereBetween('sqft', [$from, $to]);
+				if ($from || $to) {
+                	$query->whereBetween('sqft', [$from, $to]);
+				}
             }
             if ($request->price) {
                 $price = explode(',', $request->price);
@@ -80,6 +75,9 @@ class PropertyController extends Controller
             }
             if ($request->baths) {
                 $query->where('baths', $request->baths);
+            }
+            if ($request->division_id) {
+                $query->where('division_id', $request->division_id);
             }
             if ($request->beds) {
                 $query->where('beds', $request->beds);
