@@ -143,6 +143,7 @@ class ExternalUserPropertyController extends Controller
                 $property->contact_email          = $request->contact_email;
                 $property->contact_no_show        = 2;
                 $property->property_type          = $request->property_type;
+                $property->property_type_main     = $request->property_type_main;
                 $property->purpose                = $request->purpose;
                 $property->status                 = 0;
 
@@ -267,6 +268,7 @@ class ExternalUserPropertyController extends Controller
                 $property->contact_email          = $request->contact_email;
                 $property->contact_no_show        = 2;
                 $property->property_type          = $request->property_type;
+				$property->property_type_main     = $request->property_type_main;
                 $property->purpose                = $request->purpose;
                 $property->status                 = 0;
 
