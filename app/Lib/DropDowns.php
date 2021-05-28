@@ -45,6 +45,9 @@ class DropDowns
     public static function areas(){
         return DB::table('areas')->select('id','name as text_en','bn_name as text_bn', 'address', 'address_bn','image')->get();
     }
+    public static function userAreaList(){
+        return DB::table('properties')->select('id','area_id  as text_en','area_id  as text_bn')->get();
+    }
     public static function blocks(){
         return DB::table('blocks')->select('id','name as text_en','bn_name as text_bn')->get();
     }
