@@ -59,7 +59,7 @@ class PropertyController extends Controller
             // }
 			// 
 			$area = explode(',', $request->area);
-			foreach($$area as $key => $element) {
+			foreach($area as $key => $element) {
 				if($key == 0) {
 					$query->where('area_id', 'like', '%'.$element.'%');
 				}
