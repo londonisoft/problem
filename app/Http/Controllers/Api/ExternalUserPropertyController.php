@@ -116,11 +116,6 @@ class ExternalUserPropertyController extends Controller
                 $property->area_id                = $request->area_id;
                 $property->block_id               = $request->block_id;
                 $property->amenit_ids             = json_encode($request->amenit_ids) ?? [];
-                $property->education_ids          = json_encode($request->education_ids)?? [];
-                $property->hospital_ids           = json_encode($request->hospital_ids)?? [];
-                $property->restaurant_ids         = json_encode($request->restaurant_ids)?? [];
-                $property->park_ids               = json_encode($request->park_ids)?? [];
-                $property->religious_ids          = json_encode($request->religious_ids)?? [];
                 $property->title                  = $request->title;
                 $property->bn_title               = $request->bn_title;
                 $property->short_description      = $request->short_description;
@@ -241,11 +236,6 @@ class ExternalUserPropertyController extends Controller
                 $property->area_id                = $request->area_id;
                 $property->block_id               = $request->block_id;
                 $property->amenit_ids             = json_encode($request->amenit_ids) ?? [];
-                $property->education_ids          = json_encode($request->education_ids)?? [];
-                $property->hospital_ids           = json_encode($request->hospital_ids)?? [];
-                $property->restaurant_ids         = json_encode($request->restaurant_ids)?? [];
-                $property->park_ids               = json_encode($request->park_ids)?? [];
-                $property->religious_ids          = json_encode($request->religious_ids)?? [];
                 $property->title                  = $request->title;
                 $property->bn_title               = $request->bn_title;
                 $property->short_description      = $request->short_description;
