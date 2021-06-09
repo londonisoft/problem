@@ -53,10 +53,19 @@ class PropertyController extends Controller
             if ($request->advanced) {
                 $query->where('advanced', $request->advanced);
             }
-            if ($request->area_id) {
-                $area = explode(',', $request->area);
-                $query->whereIn('area_id ', $area);
-            }
+            // if ($request->area_id) {
+            //     $area = explode(',', $request->area);
+            //     $query->whereIn('area_id', $area);
+            // }
+			// 
+			$area = explode(',', $request->area);
+			foreach($$area as $key => $element) {
+				if($key == 0) {
+					$query->where('area_id', 'like', '%'.$element.'%');
+				}
+				$query->orWhere('area_id', 'like', '%'.$element.'%');
+			 }
+
             if ($request->area) {
                 $area = explode(',', $request->area);
                 $from = $area[0];
