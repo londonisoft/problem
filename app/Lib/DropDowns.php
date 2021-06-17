@@ -46,7 +46,16 @@ class DropDowns
         return DB::table('areas')->select('id','name as text_en','bn_name as text_bn', 'address', 'address_bn','image')->get();
     }
     public static function userAreaList(){
-        return DB::table('properties')->select('id','area_id  as text_en','area_id  as text_bn')->get();
+        $data = DB::table('properties')->select('area_id  as text_en','area_id  as text_bn')->get();
+
+			$final  = array();
+
+			foreach ($data as $current) {
+				if ( ! in_array($current, $final)) {
+					$final[] = $current;
+				}
+			}
+		return $final;
     }
     public static function blocks(){
         return DB::table('blocks')->select('id','name as text_en','bn_name as text_bn')->get();
