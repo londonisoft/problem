@@ -67,7 +67,7 @@
                             <select id="category_id" class="form-control" >
                               <option value=''>Select one</option>
                               <option value='1'>Residential</option>
-                              <option value='2'>Commertial</option>
+                              <option value='2'>Commercial</option>
                             </select>
                             <span class="text-danger errorCategory"></span>
                         </div>
@@ -106,7 +106,7 @@
                             <select id="edit_category_id" class="form-control" >
                               <option value=''>Select one</option>
                               <option value='1'>Residential</option>
-                              <option value='2'>Commertial</option>
+                              <option value='2'>Commercial</option>
                             </select>
                             <span class="text-danger errorCategory"></span>
                         </div>

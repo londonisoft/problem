@@ -28,6 +28,7 @@ Route::post('/contact/store', [ContactController::class, 'store'])->name('contac
 Route::post('/loan/store', [HomeLoanController::class, 'store']);
 
 Route::post('/external-user/forget-password', [AuthController::class, 'forgetPass'])->name('external-user.forget');
+Route::post('/external-user/password-change', [AuthController::class, 'changePass'])->name('external-user.changePass');
 
 Route::get('/common', function() {
     return response()->json([

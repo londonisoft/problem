@@ -83,15 +83,60 @@ class AuthController extends Controller
                         'message'  => 'You are not valid user.',
                     ]);
                 }
-				$code = rand(100000, 999999);
-				$array['message'] = "Abasvumi verification code ".$code.'.';
-				$array['mobile'] = $ExternalUser->phone;
-				SmsApi::send($array);
-				return response()->json([
-					'success' => true,
-					'status_code' => 200,
-					'id' => $ExternalUser->id,
-				]);
+                $code = rand(100000, 999999);
+                $array['message'] = "Abasvumi verification code ".$code.'.';
+                $array['mobile'] = $ExternalUser->phone;
+                SmsApi::send($array);
+
+				$ExternalUser->otp = $code;
+				$ExternalUser->save();
+
+                return response()->json([
+                    'success' => true,
+                    'status_code' => 200,
+                    'id' => $ExternalUser->id,
+                ]);
+    
+            }catch (Exception $error) {
+                return response()->json([
+                    'success'   => false,
+                    'message'  => 'Data not found.',
+                    'errors'    => $error->getMessage(),
+                ]);
+            }
+             
+        }
+    }
+    public function changePass(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required',
+            'password' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return ([
+                'success' => false,
+                'errors' => $validator->errors()
+            ]);
+        } else {
+            try{
+                $ExternalUser = ExternalUser::where('otp', $request->otp)->where('id', $request->id)->first();
+                if (!$ExternalUser) {
+                    return response()->json([
+                        'success'   => false,
+                        'message'  => 'You are not valid user.',
+                    ]);
+                }
+				$ExternalUser->password   = bcrypt($request->password);
+				$ExternalUser->otp    = '';
+				$ExternalUser->save();
+
+                return response()->json([
+                    'success' => true,
+                    'status_code' => 200,
+                    'message' => 'Password change successfull.',
+                ]);
     
             }catch (Exception $error) {
                 return response()->json([
