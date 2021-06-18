@@ -63,6 +63,46 @@ class AuthController extends Controller
             }        
         }
     }
+    public function forgetPass(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return ([
+                'success' => false,
+                'errors' => $validator->errors()
+            ]);
+        } else {
+            try{
+                $ExternalUser         = ExternalUser::where('phone', $request->phone)->first();
+                if (!$ExternalUser) {
+                    return response()->json([
+                        'success'   => false,
+                        'message'  => 'You are not valid user.',
+                    ]);
+                }
+				$code = rand(100000, 999999);
+				$array['message'] = "Abasvumi verification code ".$code.'.';
+				$array['mobile'] = $ExternalUser->phone;
+				SmsApi::send($array);
+				return response()->json([
+					'success' => true,
+					'status_code' => 200,
+					'id' => $ExternalUser->id,
+				]);
+    
+            }catch (Exception $error) {
+                return response()->json([
+                    'success'   => false,
+                    'message'  => 'Data not found.',
+                    'errors'    => $error->getMessage(),
+                ]);
+            }
+             
+        }
+    }
 
     /**
      * ExternalUser login
