@@ -125,7 +125,7 @@
             data: {
                 id: $('#edit_id').val(),
                 is_featured: $('.is_featured:checked').val(),
-                approval_status: $('.approval_status:checked').val()
+                approval_status: $('.approval_status:checked').val(),
                 contact_no_show: $('.contact_no_show:checked').val()
             },
             success: function (data) {
