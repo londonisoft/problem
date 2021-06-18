@@ -49,7 +49,7 @@
                                     <td style="vertical-align:middle;text-align:center;"> <img src="{{ asset($areaGuide->image) }}" width="50px"/> </td>
                                     <td style="vertical-align:middle;text-align:center;">
                                         <button class="btn btn-sm btn-warning" id="editEducation" data-toggle="modal" data-target="#editEducationModal" data-id="{{ $areaGuide->id }}" data-area_id="{{ $areaGuide->area_id }}" data-title="{{ $areaGuide->title }}"  data-bn_title="{{ $areaGuide->bn_title }}"  data-description="{{ $areaGuide->description }}"  data-bn_description="{{ $areaGuide->bn_description }}"  data-image="{{ $areaGuide->image }}" data-video_link="{{ $areaGuide->video_link }}"  data-type="{{ $areaGuide->type }}"><i class="fas fa-pencil-alt"></i></button>
-                                        <button class="btn btn-sm btn-danger" id="deleteEducation" data-toggle="modal" data-target="#deleteEducationModal" data-id="{{ $areaGuide->id }}" ><i class="fas fa-trash"></i></button>
+                                        <!-- <button class="btn btn-sm btn-danger" id="deleteEducation" data-toggle="modal" data-target="#deleteEducationModal" data-id="{{ $areaGuide->id }}" ><i class="fas fa-trash"></i></button> -->
                                     </td>
 
                                 </tr>

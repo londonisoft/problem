@@ -45,7 +45,7 @@
                                     <td style="vertical-align:middle;text-align:center;">{{ $blog->area_name}}</td>
                                     <td style="vertical-align:middle;text-align:center;">
                                         <button class="btn btn-sm btn-warning" id="editEducation" data-toggle="modal" data-target="#editEducationModal" data-id="{{ $blog->id }}" data-dhaka_neigbor_id ="{{ $blog->dhaka_neigbor_id  }}" data-area_id ="{{ $blog->area_id  }}"  ><i class="fas fa-pencil-alt"></i></button>
-                                        <button class="btn btn-sm btn-danger" id="deleteEducation" data-toggle="modal" data-target="#deleteEducationModal" data-id="{{ $blog->id }}" ><i class="fas fa-trash"></i></button>
+                                        <!-- <button class="btn btn-sm btn-danger" id="deleteEducation" data-toggle="modal" data-target="#deleteEducationModal" data-id="{{ $blog->id }}" ><i class="fas fa-trash"></i></button> -->
                                     </td>
                                 </tr>
                             @endforeach

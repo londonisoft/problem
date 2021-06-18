@@ -57,7 +57,7 @@
                             
                             <td style="vertical-align:middle;text-align:center;">
                                 <button class="btn btn-sm btn-warning" id="editUser" data-toggle="modal" data-target="#editUserModal" data-id="{{ $supplier->id }}" data-name="{{ $supplier->name }}" data-email="{{ $supplier->email }}" data-phone="{{ $supplier->phone }}" data-address="{{ $supplier->address }}" data-experiance="{{ $supplier->experiance }}"  data-type="{{ $supplier->type }}" title="Edit"><i class="fas fa-pencil-alt"></i></button>
-                                <button class="btn btn-sm btn-danger"  id="deleteUser" data-toggle="modal" data-target="#deleteUserModal" data-id="{{ $supplier->id }}" title="Delete"><i class="fas fa-trash"></i></button>
+                                <!-- <button class="btn btn-sm btn-danger"  id="deleteUser" data-toggle="modal" data-target="#deleteUserModal" data-id="{{ $supplier->id }}" title="Delete"><i class="fas fa-trash"></i></button> -->
                             </td>
                         </tr>
                       @endforeach

@@ -53,7 +53,7 @@
                             <td><img src="{{ asset($agent->image) }}" style="width: 80px;height:60px;"/></td>
                             <td style="vertical-align:middle;text-align:center;">
                                 <button class="btn btn-sm btn-warning" id="editUser" data-toggle="modal" data-target="#editUserModal" data-id="{{ $agent->id }}" data-name="{{ $agent->name }}" data-email="{{ $agent->email }}" data-phone="{{ $agent->phone }}" data-role_id="{{ $agent->role_id }}" data-image="{{ $agent->image }}" title="Edit"><i class="fas fa-pencil-alt"></i></button>
-                                <button class="btn btn-sm btn-danger"  id="deleteUser" data-toggle="modal" data-target="#deleteUserModal" data-id="{{ $agent->id }}" title="Delete"><i class="fas fa-trash"></i></button>
+                                <!-- <button class="btn btn-sm btn-danger"  id="deleteUser" data-toggle="modal" data-target="#deleteUserModal" data-id="{{ $agent->id }}" title="Delete"><i class="fas fa-trash"></i></button> -->
                             </td>
                         </tr>
                       @endforeach

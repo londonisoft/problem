@@ -49,7 +49,7 @@
                                     <td style="vertical-align:middle;text-align:center;">{{ $thana->url}}</td>
                                     <td style="vertical-align:middle;text-align:center;">
                                         <button class="btn btn-sm btn-warning" id="editEducation" data-toggle="modal" data-id="{{ $thana->id }}" data-district_id="{{ $thana->district_id }}" data-name="{{ $thana->name }}" data-bn_name="{{ $thana->bn_name }}" data-url="{{ $thana->url }}"   ><i class="fas fa-pencil-alt"></i></button>
-                                        <button class="btn btn-sm btn-danger" id="deleteEducation" data-toggle="modal" data-target="#deleteEducationModal" data-id="{{ $thana->id }}" ><i class="fas fa-trash"></i></button>
+                                        <!-- <button class="btn btn-sm btn-danger" id="deleteEducation" data-toggle="modal" data-target="#deleteEducationModal" data-id="{{ $thana->id }}" ><i class="fas fa-trash"></i></button> -->
                                     </td>
                                 </tr>
                             @endforeach

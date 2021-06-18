@@ -45,7 +45,7 @@
                                     <td style="vertical-align:middle;text-align:center;">{{ $amenitie->bn_name}}</td>
                                     <td style="vertical-align:middle;text-align:center;">
                                         <button class="btn btn-sm btn-warning" id="editEducation" data-toggle="modal" data-target="#editEducationModal" data-id="{{ $amenitie->id }}" data-name="{{ $amenitie->name }}"  data-bn_name="{{ $amenitie->bn_name }}" data-icon="{{ $amenitie->icon }}" ><i class="fas fa-pencil-alt"></i></button>
-                                        <button class="btn btn-sm btn-danger" id="deleteEducation" data-toggle="modal" data-target="#deleteEducationModal" data-id="{{ $amenitie->id }}" ><i class="fas fa-trash"></i></button>
+                                        <!-- <button class="btn btn-sm btn-danger" id="deleteEducation" data-toggle="modal" data-target="#deleteEducationModal" data-id="{{ $amenitie->id }}" ><i class="fas fa-trash"></i></button> -->
                                     </td>
                                 </tr>
                             @endforeach

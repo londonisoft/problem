@@ -47,7 +47,7 @@
                                     <td style="vertical-align:middle;text-align:center;">
                                     <button class="btn btn-sm btn-warning" id="editEducation" data-toggle="modal" data-target="#editEducationModal" data-id="{{ $service->id }}" data-service_category_id="{{ $service->service_category_id }}" data-name="{{ $service->name }}"  data-name_bn="{{ $service->name_bn }}"  data-description="{{ $service->description }}"  data-description_bn="{{ $service->description_bn }}"  data-image="{{ $service->image }}"  ><i class="fas fa-pencil-alt"></i></button>
                                     <button class="btn btn-sm btn-warning" id="editRole" data-toggle="modal" data-target="#createRoleModal" data-id="{{ $service->id }}" data-is_featured="{{ $service->is_featured }}" data-status="{{ $service->status }}" title="Edit"><i class="fas fa-plus"></i></button>
-                                        <a onclick="return confirm('Are you sure');" href="{{ route('service.destroy',['id'=>$service->id])}}" class="btn btn-sm btn-danger" id="deleteEducation" ><i class="fas fa-trash"></i></a>
+                                        <!-- <a onclick="return confirm('Are you sure');" href="{{ route('service.destroy',['id'=>$service->id])}}" class="btn btn-sm btn-danger" id="deleteEducation" ><i class="fas fa-trash"></i></a> -->
                                     </td>
 
                                 </tr>

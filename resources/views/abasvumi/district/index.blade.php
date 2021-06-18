@@ -49,7 +49,7 @@
                                     <td style="vertical-align:middle;text-align:center;">{{ $district->url}}</td>
                                     <td style="vertical-align:middle;text-align:center;">
                                         <button class="btn btn-sm btn-warning" id="editEducation" data-toggle="modal" data-id="{{ $district->id }}" data-division_id="{{ $district->division_id }}" data-name="{{ $district->name }}" data-bn_name="{{ $district->bn_name }}" data-url="{{ $district->url }}"  data-lat="{{ $district->lat }}"  data-lon="{{ $district->lon }}"  ><i class="fas fa-pencil-alt"></i></button>
-                                        <button class="btn btn-sm btn-danger" id="deleteEducation" data-toggle="modal" data-target="#deleteEducationModal" data-id="{{ $district->id }}" ><i class="fas fa-trash"></i></button>
+                                        <!-- <button class="btn btn-sm btn-danger" id="deleteEducation" data-toggle="modal" data-target="#deleteEducationModal" data-id="{{ $district->id }}" ><i class="fas fa-trash"></i></button> -->
                                     </td>
                                 </tr>
                             @endforeach

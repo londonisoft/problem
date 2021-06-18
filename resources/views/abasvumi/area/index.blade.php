@@ -53,7 +53,7 @@
                                            data-address="{{ $area->address }}" 
                                            data-address_bn="{{ $area->address_bn }}"
                                             data-image="{{ $area->image }}"  ><i class="fas fa-pencil-alt"></i></button>
-                                        <button class="btn btn-sm btn-danger" id="deleteEducation" data-toggle="modal" data-target="#deleteEducationModal" data-id="{{ $area->id }}" ><i class="fas fa-trash"></i></button>
+                                        <!-- <button class="btn btn-sm btn-danger" id="deleteEducation" data-toggle="modal" data-target="#deleteEducationModal" data-id="{{ $area->id }}" ><i class="fas fa-trash"></i></button> -->
                                     </td>
 
                                 </tr>

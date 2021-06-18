@@ -53,7 +53,7 @@
                                     <td style="vertical-align:middle;text-align:center;">
                                         <!-- <a href="{{ route('property.edit',['id'=>$property->id])}}" class="btn btn-sm btn-warning" id="editEducation"><i class="fas fa-pencil-alt"></i></a> -->
                                         <button class="btn btn-sm btn-warning" id="editRole" data-toggle="modal" data-target="#createRoleModal" data-id="{{ $property->id }}" data-is_featured="{{ $property->is_featured }}" data-approval_status="{{ $property->approval_status }}" title="Edit"><i class="fas fa-pencil-alt"></i></button>
-                                        <a onclick="return confirm('Are you sure');" href="{{ route('property.destroy',['id'=>$property->id])}}" class="btn btn-sm btn-danger" id="deleteEducation" ><i class="fas fa-trash"></i></a>
+                                        <!-- <a onclick="return confirm('Are you sure');" href="{{ route('property.destroy',['id'=>$property->id])}}" class="btn btn-sm btn-danger" id="deleteEducation" ><i class="fas fa-trash"></i></a> -->
                                     </td>
 
                                 </tr>

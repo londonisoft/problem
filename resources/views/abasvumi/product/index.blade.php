@@ -49,7 +49,7 @@
                                     <td style="vertical-align:middle;text-align:center;">
                                         <button class="btn btn-sm btn-warning" id="editEducation" data-toggle="modal" data-target="#editEducationModal" data-id="{{ $product->id }}" data-product_category_id="{{ $product->product_category_id }}" data-unit_id="{{ $product->unit_id }}" data-name="{{ $product->name }}"  data-name_bn="{{ $product->name_bn }}"  data-description="{{ $product->description }}"  data-description_bn="{{ $product->description_bn }}"  data-image="{{ $product->image }}" data-price="{{ $product->price }}"  ><i class="fas fa-pencil-alt"></i></button>
                                         <button class="btn btn-sm btn-warning" id="editRole" data-toggle="modal" data-target="#createRoleModal" data-id="{{ $product->id }}" data-is_featured="{{ $product->is_featured }}" data-status="{{ $product->status }}" title="Edit"><i class="fas fa-plus"></i></button>
-                                        <a onclick="return confirm('Are you sure');" href="{{ route('product.destroy',['id'=>$product->id])}}" class="btn btn-sm btn-danger" id="deleteEducation" ><i class="fas fa-trash"></i></a>
+                                        <!-- <a onclick="return confirm('Are you sure');" href="{{ route('product.destroy',['id'=>$product->id])}}" class="btn btn-sm btn-danger" id="deleteEducation" ><i class="fas fa-trash"></i></a> -->
                                     </td>
                                 </tr>
                             @endforeach

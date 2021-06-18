@@ -45,7 +45,7 @@
                                     <td style="vertical-align:middle;text-align:center;">{{ ($user->status) ? "Approved" : "Pending"}}</td>                                  
                                     <td style="vertical-align:middle;text-align:center;">
                                         <button class="btn btn-sm btn-warning" id="editRole" data-toggle="modal" data-target="#createRoleModal" data-id="{{ $user->id }}" data-is_featured="{{ $user->is_featured }}" data-status="{{ $user->status }}" title="Edit"><i class="fas fa-pencil-alt"></i></button>
-                                        <a onclick="return confirm('Are you sure');" href="{{ route('user.destroy',['id'=>$user->id])}}" class="btn btn-sm btn-danger" id="deleteEducation" ><i class="fas fa-trash"></i></a>
+                                        <!-- <a onclick="return confirm('Are you sure');" href="{{ route('user.destroy',['id'=>$user->id])}}" class="btn btn-sm btn-danger" id="deleteEducation" ><i class="fas fa-trash"></i></a> -->
                                     </td>
 
                                 </tr>

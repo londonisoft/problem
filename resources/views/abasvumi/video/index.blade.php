@@ -49,7 +49,7 @@
                                     <td style="vertical-align:middle;text-align:center;">{{ $video->video_link}}</td>
                                     <td style="vertical-align:middle;text-align:center;">
                                         <button class="btn btn-sm btn-warning" id="editEducation" data-toggle="modal" data-target="#editEducationModal" data-id="{{ $video->id }}" data-title="{{ $video->title }}" data-bn_title="{{ $video->bn_title }}" data-image="{{ $video->image}}" data-video_link="{{ $video->video_link }}" ><i class="fas fa-pencil-alt"></i></button>
-                                        <button class="btn btn-sm btn-danger" id="deleteEducation" data-toggle="modal" data-target="#deleteEducationModal" data-id="{{ $video->id }}" ><i class="fas fa-trash"></i></button>
+                                        <!-- <button class="btn btn-sm btn-danger" id="deleteEducation" data-toggle="modal" data-target="#deleteEducationModal" data-id="{{ $video->id }}" ><i class="fas fa-trash"></i></button> -->
                                     </td>
                                 </tr>
                             @endforeach

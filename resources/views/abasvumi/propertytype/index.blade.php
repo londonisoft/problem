@@ -39,7 +39,7 @@
                             <td style="vertical-align:middle;text-align:center;">
                                 <button class="btn btn-sm btn-warning" id="editRole" data-toggle="modal" data-target="#editRoleModal" data-id="{{ $propertyType->id }}" data-name="{{ $propertyType->name }}" data-bn_name="{{ $propertyType->bn_name }}" data-category_id="{{ $propertyType->category_id }}" title="Edit"><i class="fas fa-pencil-alt"></i></button>
                                 <button class="btn btn-sm btn-warning" id="editType" data-toggle="modal" data-target="#editTypeModal" data-id="{{ $propertyType->id }}" data-is_menu="{{ $propertyType->is_menu }}" data-status="{{ $propertyType->status }}" title="Edit"><i class="fas fa-plus"></i></button>
-                                <button class="btn btn-sm btn-danger"  id="deleteRole" data-toggle="modal" data-target="#deleteRoleModal" data-id="{{ $propertyType->id }}" title="Delete"><i class="fas fa-trash"></i></button>
+                                <!-- <button class="btn btn-sm btn-danger"  id="deleteRole" data-toggle="modal" data-target="#deleteRoleModal" data-id="{{ $propertyType->id }}" title="Delete"><i class="fas fa-trash"></i></button> -->
                             </td>
                         </tr>
                       @endforeach
