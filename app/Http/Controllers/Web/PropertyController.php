@@ -489,6 +489,7 @@ class PropertyController extends Controller
         $property = Property::find($request->id);
         $property->is_featured = $request->is_featured;
         $property->approval_status = $request->approval_status;
+        $property->contact_no_show = $request->contact_no_show;
         $property->save();
         return $property;
         return response()->json([

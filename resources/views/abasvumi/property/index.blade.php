@@ -90,6 +90,11 @@
                         <input name='approval_status' class='approval_status' value ='1'  type='radio'> Actice
                         <input name='approval_status' class='approval_status' value ='0' Class="ml-2" type='radio'> Inactice
                       </div>
+                      <div class="form-group">
+                        <label for="name">Active Mobile<span class="text-danger" title="Required">*</span></label><br>
+                        <input name='contact_no_show' class='contact_no_show' value ='2'  type='radio'> Actice
+                        <input name='contact_no_show' class='contact_no_show' value ='1' Class="ml-2" type='radio'> Inactice
+                      </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -109,6 +114,7 @@
         $('#edit_id').val($(this).data('id'));
         $('input:radio[name="is_featured"][value="'+$(this).data('is_featured')+'"]').attr('checked',true);
         $('input:radio[name="approval_status"][value="'+$(this).data('approval_status')+'"]').attr('checked',true);
+        $('input:radio[name="contact_no_show"][value="'+$(this).data('contact_no_show')+'"]').attr('checked',true);
     });
 
     $("#destroyUser").click(function(){
@@ -120,6 +126,7 @@
                 id: $('#edit_id').val(),
                 is_featured: $('.is_featured:checked').val(),
                 approval_status: $('.approval_status:checked').val()
+                contact_no_show: $('.contact_no_show:checked').val()
             },
             success: function (data) {
                 $('#createRoleModal').modal('hide');
