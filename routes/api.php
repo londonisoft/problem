@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Api\AgentServiceController;
 use App\Http\Controllers\Api\ExternalUserPropertyController;
+use App\Http\Controllers\Api\ExternalUserRealEstateController;
 use App\Http\Controllers\Api\ExternalUserController;
+use App\Http\Controllers\Api\RealEstateController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserProductController;
 use App\Http\Controllers\Api\UserServiceController;
@@ -87,6 +89,10 @@ Route::get('/products/view/{id}', [ProductController::class, 'view']);
 Route::get('/services', [ServiceController::class, 'index']);
 Route::get('/services/view/{id}', [ServiceController::class, 'view']);
 
+// for service route
+Route::get('/real-estates', [RealEstateController::class, 'index']);
+Route::get('/real-estates/view/{id}', [RealEstateController::class, 'view']);
+
 
 
 Route::get('/properties', [PropertyController::class, 'index'])->name('properties');
@@ -128,6 +134,15 @@ Route::group(['prefix'=>'/external-user','middleware'=>'auth:sanctum'], function
     Route::post('/property/thumbnail', [ExternalUserPropertyController::class, 'uploadThumnail'])->name('ExternalUser.property.uploadThumnail');
     Route::post('/property/image-remove', [ExternalUserPropertyController::class, 'imageRemove'])->name('ExternalUser.property.remove');
     Route::post('/property/upload-img', [ExternalUserPropertyController::class, 'uploadProImg'])->name('ExternalUser.property.uploadProImg');
+    
+	Route::get('/real-estates', [ExternalUserRealEstateController::class, 'index']);
+    Route::post('/real-estates/store', [ExternalUserRealEstateController::class, 'store']);
+    Route::get('/real-estates/view/{id}', [ExternalUserRealEstateController::class, 'view']);
+    Route::get('/real-estates/edit/{id}', [ExternalUserRealEstateController::class, 'edit']);
+    Route::post('/real-estates/update', [ExternalUserRealEstateController::class, 'update']);
+    Route::post('/real-estates/thumbnail', [ExternalUserRealEstateController::class, 'uploadThumnail']);
+    Route::post('/real-estates/image-remove', [ExternalUserRealEstateController::class, 'imageRemove']);
+    Route::post('/real-estates/upload-img', [ExternalUserRealEstateController::class, 'uploadProImg']);
 
 
     Route::get('/products', [UserProductController::class, 'index'])->name('ExternalUser.products');

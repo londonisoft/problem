@@ -134,29 +134,6 @@ class PropertyController extends Controller
     public function view($id) {
         try{
             $property = Property::with('images:property_id,image,image_type_id')->where('id',$id)->first();
-
-//            $propertyAmenities             = json_decode($property->amenities);
-//            $propertyEducationalInstitutes = json_decode($property->educational_institutes);
-//            $propertyHospitals             = json_decode($property->hospitals);
-//            $propertyRestaurants           = json_decode($property->restaurants);
-//            $propertyParks                 = json_decode($property->parks);
-//            $propertyReligious             = json_decode($property->religious);
-            //return $propertyReligious;
-
-            $divisions    = Division::all();
-            $districts    = District::where("division_id",$property->division_id)->get();
-            $thanas       = Thana::where("district_id",$property->district_id)->get();
-            $areas        = Area::all();
-            $blocks       = Block::all();
-            $propertyTypes = ServiceType::all();
-
-            $amenities    = Ameniti::select('id','name')->get();
-            $educations   = EducationalInstitute::select('id','name')->get();
-            $hospitals    = Hospital::select('id','name')->get();
-            $restaurants  = Restaurant::select('id','name')->get();
-            $parks        = Park::select('id','name')->get();
-            $religious    = ReligiousInstitution::select('id','name')->get();
-
         }catch (Exception $error) {
             return response()->json([
                 'status_code'   => false,
@@ -168,24 +145,6 @@ class PropertyController extends Controller
         return response()->json([
             'status_code' => 200,
             'property'    => $property,
-            'divisions'   => $divisions,
-            'districts'   => $districts,
-            'thanas'      => $thanas,
-//            'serviceAmenities'        => $propertyAmenities,
-//            'serviceEduInstitutes'    => $propertyEducationalInstitutes,
-//            'servicehospitals'    => $propertyHospitals,
-//            'serviceRestaurants'    => $propertyRestaurants,
-//            'serviceParks'    => $propertyParks,
-//            'serviceReligious'    => $propertyReligious,
-            'areas'         => $areas,
-            'blocks'        => $blocks,
-            'serviceTypes'  => $propertyTypes,
-            'amenities'     => $amenities,
-            'educations'    => $educations,
-            'hospitals'     => $hospitals,
-            'restaurants'   => $restaurants,
-            'parks'         => $parks,
-            'religious'     => $religious
         ]);
     }
 

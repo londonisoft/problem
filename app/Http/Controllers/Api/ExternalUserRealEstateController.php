@@ -13,9 +13,9 @@ use App\Models\Hospital;
 use App\Models\Park;
 use App\Models\ReligiousInstitution;
 use App\Models\Restaurant;
-use App\Models\Property;
-use App\Models\PropertyImage;
-use App\Models\PropertyType;
+use App\Models\RealEstate;
+use App\Models\RealEstateImage;
+use App\Models\RealEstateType;
 use App\Models\Thana;
 use Exception;
 use Illuminate\Http\Request;
@@ -23,12 +23,12 @@ use Illuminate\Support\Facades\DB;
 use Validator;
 use Image;
 
-class ExternalUserPropertyController extends Controller
+class ExternalUserRealEstateController extends Controller
 {
 
     public function index() {
         try{
-            $query = Property::with('images:property_id,image,image_type_id')->where('external_user_id',auth()->user()->id);            
+            $query = RealEstate::with('images:real_estate_id,image,image_type_id')->with('details')->where('external_user_id',auth()->user()->id);            
             $properties = $query->paginate(config('app.perPage'));
 
         }catch (Exception $error) {
@@ -47,16 +47,12 @@ class ExternalUserPropertyController extends Controller
 
     }
 
-    /*
-    * Property Store
-    */
+    
     public function store(Request $request) {
         $validator = Validator::make($request->all(),[
             'division_id'     => 'required',
             'district_id'     => 'required',
             'thana_id'        => 'required',
-            'area_id'         => 'required',
-            'block_id'        => 'required',
             'title'           => 'required',
             'bn_title'        => 'required',
             'description'     => 'required',
@@ -64,20 +60,13 @@ class ExternalUserPropertyController extends Controller
             'address'         => 'required',
             'lat'             => 'required',
             'lon'             => 'required',
-            'interest_rate'   => 'required',
             'price'           => 'required',
-            'sqft'            => 'required',
-            'baths'           => 'required',
-            'garage'          => 'required',
-            'balcony'         => 'required',
-            'property_type'    => 'required',
-            'purpose'         => 'required',
+            'area'            => 'required',
+            'property_type'    => 'required'
         ],[
             'division_id.required' => 'Division is required',
             'district_id.required' => 'District is required',
             'thana_id.required'    => 'Thana is required',
-            'area_id.required'     => 'Area is required',
-            'block_id.required'    => 'Block is required',
             'title.required'       => 'Title is required',
             'bn_title.required'    => 'Bangla title is required',
             'description.required' => 'Description is required',
@@ -85,14 +74,9 @@ class ExternalUserPropertyController extends Controller
             'address.required'     => 'Address is required',
             'lat.required'         => 'Lat is required',
             'lon.required'         => 'Lon is required',
-            'interest_rate.required' => 'interest_rate is required',
             'price.required'       => 'price is required',
-            'sqft.required'        => 'sqft is required',
-            'baths.required'       => 'Blobathsck is required',
-            'garage.required'      => 'Garage is required',
-            'balcony.required'     => 'Balcony is required',
-            'property_type.required' => 'Property type is required',
-            'purpose.required'     => 'Purpose is required',
+            'area.required'        => 'Area is required',
+            'property_type.required' => 'RealEstate type is required'
         ]);
 
         if ($validator->fails()) {
@@ -101,69 +85,72 @@ class ExternalUserPropertyController extends Controller
                 'errors' => $validator->errors()
             ]);
         } else {
-           // DB::beginTransaction();
-           // try {
+            DB::beginTransaction();
+            try {
                 
                 
                 $property_id = 'Abasvumi - ID'.rand(100000,999999);
                 
-                $property                         = new Property();
+                $property                         = new RealEstate();
                 $property->property_id            = $property_id;
                 $property->external_user_id       = auth()->user()->id;
                 $property->division_id            = $request->division_id;
                 $property->district_id            = $request->district_id;
                 $property->thana_id               = $request->thana_id;
-                $property->area_id                = $request->area_id;
-                $property->block_id               = $request->block_id;
                 $property->amenit_ids             = json_encode($request->amenit_ids) ?? [];
                 $property->title                  = $request->title;
                 $property->bn_title               = $request->bn_title;
-                $property->short_description      = $request->short_description;
-                $property->short_description_bn   = $request->short_description_bn;
                 $property->description            = $request->description;
                 $property->bn_description         = $request->bn_description;
                 $property->address                = $request->address;
+				$property->total_unit            = $request->total_unit;
                 $property->address_bn             = $request->address_bn;
                 $property->lat                    = $request->lat;
                 $property->lon                    = $request->lon;
-                $property->interest_rate          = $request->interest_rate;
                 $property->price                  = $request->price;
-                $property->sqft                   = $request->sqft;
-                $property->beds                   = $request->beds;
-                $property->baths                  = $request->baths;
-                $property->garage                 = $request->garage;
-                $property->balcony                = $request->balcony;
-                $property->video_link             = $request->video_link;
+                $property->area                   = $request->area;
                 $property->contact_no             = $request->contact_no;
                 $property->contact_email          = $request->contact_email;
                 $property->contact_no_show        = 2;
                 $property->property_type          = $request->property_type;
                 $property->property_type_main     = $request->property_type_main;
-                $property->purpose                = $request->purpose;
                 $property->status                 = 0;
 
                 if ($property->save()) {
+
+					foreach ($request->details as $detail) {
+                        $type = new RealEstateType();
+                        $type->real_estate_id = $property->id;
+                        $type->external_user_id = auth()->user()->id;
+                        $type->beds = $detail['beds'];
+                        $type->price = $detail['price'];
+                        $type->total_unit = $detail['total_unit'];
+                        $type->area = $detail['area'];
+                        $type->status = 1;
+                        $type->save();
+                    }
+				
                     foreach ($request->images as $img) {
-                        $property_image = PropertyImage::find($img['id']);
-                        $property_image->property_id = $property->id;
+                        $property_image = RealEstateImage::find($img['id']);
+                        $property_image->real_estate_id = $property->id;
                         $property_image->save();
                     }
 
                     $thum_img = $request->showThumnail;
-                    $thumbnail_img = PropertyImage::find($thum_img['id']);
-                    $thumbnail_img->property_id = $property->id;
+                    $thumbnail_img = RealEstateImage::find($thum_img['id']);
+                    $thumbnail_img->real_estate_id = $property->id;
                     $thumbnail_img->save();
-                  //  DB::commit();
+                    DB::commit();
 
                     return response()->json([
                         'success'   => true,
                         'status_code' => 200,
-                        'message' => "Property save succcessfully",
+                        'message' => "RealEstate save succcessfully",
                         'data'        => $property
                     ]);
                 }
 
-            /*} catch (\Exception $ex) {
+            } catch (\Exception $ex) {
                 DB::rollBack();
 
                 return response()->json([
@@ -171,7 +158,7 @@ class ExternalUserPropertyController extends Controller
                     'status_code'  => 500,
                     'message'        => $ex,
                 ]);
-            }*/
+            }
         }
         
     }
@@ -180,8 +167,6 @@ class ExternalUserPropertyController extends Controller
             'division_id'     => 'required',
             'district_id'     => 'required',
             'thana_id'        => 'required',
-            'area_id'         => 'required',
-            'block_id'        => 'required',
             'title'           => 'required',
             'bn_title'        => 'required',
             'description'     => 'required',
@@ -189,20 +174,13 @@ class ExternalUserPropertyController extends Controller
             'address'         => 'required',
             'lat'             => 'required',
             'lon'             => 'required',
-            'interest_rate'   => 'required',
             'price'           => 'required',
-            'sqft'            => 'required',
-            'baths'           => 'required',
-            'garage'          => 'required',
-            'balcony'         => 'required',
-            'property_type'    => 'required',
-            'purpose'         => 'required',
+            'area'            => 'required',
+            'property_type'    => 'required'
         ],[
             'division_id.required' => 'Division is required',
             'district_id.required' => 'District is required',
             'thana_id.required'    => 'Thana is required',
-            'area_id.required'     => 'Area is required',
-            'block_id.required'    => 'Block is required',
             'title.required'       => 'Title is required',
             'bn_title.required'    => 'Bangla title is required',
             'description.required' => 'Description is required',
@@ -210,14 +188,9 @@ class ExternalUserPropertyController extends Controller
             'address.required'     => 'Address is required',
             'lat.required'         => 'Lat is required',
             'lon.required'         => 'Lon is required',
-            'interest_rate.required' => 'interest_rate is required',
             'price.required'       => 'price is required',
-            'sqft.required'        => 'sqft is required',
-            'baths.required'       => 'Blobathsck is required',
-            'garage.required'      => 'Garage is required',
-            'balcony.required'     => 'Balcony is required',
-            'property_type.required' => 'Property type is required',
-            'purpose.required'     => 'Purpose is required',
+            'area.required'        => 'Area is required',
+            'property_type.required' => 'RealEstate type is required'
         ]);
 
         if ($validator->fails()) {
@@ -226,74 +199,79 @@ class ExternalUserPropertyController extends Controller
                 'errors' => $validator->errors()
             ]);
         } else {
-            // try {
-             
-                $property = Property::find($request->id);
+             try {
+				DB::beginTransaction();
+
+                $property = RealEstate::find($request->id);
                 $property->external_user_id       = auth()->user()->id;
                 $property->division_id            = $request->division_id;
                 $property->district_id            = $request->district_id;
                 $property->thana_id               = $request->thana_id;
-                $property->area_id                = $request->area_id;
-                $property->block_id               = $request->block_id;
                 $property->amenit_ids             = json_encode($request->amenit_ids) ?? [];
                 $property->title                  = $request->title;
                 $property->bn_title               = $request->bn_title;
-                $property->short_description      = $request->short_description;
-                $property->short_description_bn   = $request->short_description_bn;
                 $property->description            = $request->description;
+                $property->total_unit            = $request->total_unit;
                 $property->bn_description         = $request->bn_description;
                 $property->address                = $request->address;
                 $property->address_bn             = $request->address_bn;
                 $property->lat                    = $request->lat;
                 $property->lon                    = $request->lon;
-                $property->interest_rate          = $request->interest_rate;
                 $property->price                  = $request->price;
-                $property->sqft                   = $request->sqft;
-                $property->beds                   = $request->beds;
-                $property->baths                  = $request->baths;
-                $property->garage                 = $request->garage;
-                $property->balcony                = $request->balcony;
-                $property->video_link             = $request->video_link;
+                $property->area                   = $request->area;
                 $property->contact_no             = $request->contact_no;
                 $property->contact_email          = $request->contact_email;
                 $property->contact_no_show        = 2;
                 $property->property_type          = $request->property_type;
 				$property->property_type_main     = $request->property_type_main;
-                $property->purpose                = $request->purpose;
                 $property->status                 = 0;
 
-                //PropertyImage::where('property_id',$property->id)->delete();
 
                 if ($property->update()) {
+
+                	RealEstateType::where('real_estate_id',$property->id)->delete();
+
+					foreach ($request->details as $detail) {
+                        $type = new RealEstateType();
+                        $type->real_estate_id = $property->id;
+                        $type->external_user_id = auth()->user()->id;
+                        $type->beds = $detail['beds'];
+                        $type->price = $detail['price'];
+                        $type->total_unit = $detail['total_unit'];
+                        $type->area = $detail['area'];
+                        $type->status = 1;
+                        $type->save();
+                    }
+
                     foreach ($request->images as $img) {
-                        $property_image = PropertyImage::find($img['id']);
-                        $property_image->property_id = $property->id;
+                        $property_image = RealEstateImage::find($img['id']);
+                        $property_image->real_estate_id = $property->id;
                         $property_image->save();
                     }
 
                     $thum_img = $request->showThumnail;
-                    $thumbnail_img = PropertyImage::find($thum_img['id']);
-                    $thumbnail_img->property_id = $property->id;
+                    $thumbnail_img = RealEstateImage::find($thum_img['id']);
+                    $thumbnail_img->real_estate_id = $property->id;
                     $thumbnail_img->save();
-                    // DB::commit();
+                    DB::commit();
 
                     return response()->json([
                         'success'   => true,
                         'status_code' => 200,
-                        'message' => "Property update succcessfully",
+                        'message' => "RealEstate update succcessfully",
                         'data'        => $property
                     ]);
                 }
 
-            // } catch (\Exception $ex) {
-            //     DB::rollBack();
+            } catch (\Exception $ex) {
+                DB::rollBack();
 
-            //     return response()->json([
-            //         'success'      => false,
-            //         'status_code'  => 500,
-            //         'message'        => $ex,
-            //     ]);
-            // }
+                return response()->json([
+                    'success'      => false,
+                    'status_code'  => 500,
+                    'message'        => $ex,
+                ]);
+            }
         }
         
     }
@@ -301,8 +279,8 @@ class ExternalUserPropertyController extends Controller
 
     public function uploadThumnail (Request $request) {
 
-        $property_image = new Propertyimage();
-        $property_image->property_id = 0;
+        $property_image = new RealEstateImage();
+        $property_image->real_estate_id = 0;
         $property_image->external_user_id = auth()->user()->id;
         $property_image->image_type_id = 1;
 
@@ -319,15 +297,15 @@ class ExternalUserPropertyController extends Controller
         return response()->json([
             'success'   => true,
             'status_code' => 200,
-            'message' => "Property save succcessfully",
+            'message' => "RealEstate save succcessfully",
             'data'        => $property_image
         ]);
         
     }
     public function uploadProImg (Request $request) {
 
-        $property_image = new PropertyImage();
-        $property_image->property_id = 0;
+        $property_image = new RealEstateImage();
+        $property_image->real_estate_id = 0;
         $property_image->external_user_id = auth()->user()->id;
         $property_image->image_type_id = 2;
 
@@ -343,7 +321,7 @@ class ExternalUserPropertyController extends Controller
         return response()->json([
             'success'   => true,
             'status_code' => 200,
-            'message' => "Property save succcessfully",
+            'message' => "RealEstate save succcessfully",
             'data'        => $property_image
         ]);
         
@@ -352,7 +330,7 @@ class ExternalUserPropertyController extends Controller
 
        
             $img_id = $request->image_id;
-            $propertyImage = PropertyImage::find($img_id);
+            $propertyImage = RealEstateImage::find($img_id);
 
             // if($propertyImage->image != null && file_exists($propertyImage->image)){
             //     unlink($propertyImage->image);
@@ -363,7 +341,7 @@ class ExternalUserPropertyController extends Controller
             return response()->json([
                 'success'   => true,
                 'status_code' => 200,
-                'message' => "Property image remove succcessfully",
+                'message' => "RealEstate image remove succcessfully",
                 'data'        => []
             ]);
        
@@ -371,9 +349,9 @@ class ExternalUserPropertyController extends Controller
         
     }
 
-    public function view($id) {
+	public function view($id) {
         try{
-            $property = Property::with('images:id,property_id,image,image_type_id')->where('id',$id)->first();
+            $property = RealEstate::with('images:id,real_estate_id,image,image_type_id')->with('details')->where('id',$id)->first();
 
 
         }catch (Exception $error) {
@@ -389,6 +367,5 @@ class ExternalUserPropertyController extends Controller
             'property'    => $property,
         ]);
     }
-
 
 }
