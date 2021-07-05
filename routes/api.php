@@ -70,6 +70,7 @@ Route::get('/frontend-data', function() {
         ]);
 });
 
+Route::get('/get-lat-lon', [PropertyController::class, 'getLatLon']);
 Route::get('/properties/similar/{type}', [PropertyController::class, 'getSimilarProperty']);
 Route::get('/properties/{status}/{category}', [PropertyController::class, 'propertyByStatusCategory']);
 Route::get('/properties/{status}', [PropertyController::class, 'propertyByStatus']);

@@ -23,6 +23,28 @@ use Illuminate\Support\Facades\DB;
 
 class PropertyController extends Controller
 {
+
+
+	public function getLatLon () {
+		try{
+            $query = Property::select('lat','lon');
+            $services = $query->get();
+
+        }catch (\Exception $error) {
+            return response()->json([
+                'status_code'   => false,
+                'message'  => 'Data not found.',
+                'errors'    => $error->getMessage(),
+            ]);
+        }
+
+        return response()->json([
+            'status_code' => 200,
+            'data'        => $services,
+        ]);
+	}
+
+
     /**
      * sortBy:
      * 1 = New to Old
@@ -30,6 +52,7 @@ class PropertyController extends Controller
      * 3 = Price High to Low
      * 4 = Price Low to High
      */
+	
     public function index(Request $request) {
         try{
             $query = Property::select('id','price','title','bn_title','district_id','division_id','thana_id','garage','balcony','address_bn','address','beds','baths','sqft','created_at')->with('images:property_id,image,image_type_id');
