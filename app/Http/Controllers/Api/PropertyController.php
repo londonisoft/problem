@@ -28,7 +28,7 @@ class PropertyController extends Controller
 	public function getLatLon () {
 		try{
 
-            $query = Property::select('lat','lon');
+            $query = Property::select('lat','lon','address', 'title');
             $services = $query->get();
 			$data = []; 
 
@@ -40,7 +40,8 @@ class PropertyController extends Controller
 								"coordinates" => [(float)$service->lon, (float)$service->lat]
 							],
 							"properties" => [
-								"type" => "event",
+								"title" => $service->title,
+								"address" =>  $service->address,
 							]
 						];
 				$data [$key] = $tmpData;
