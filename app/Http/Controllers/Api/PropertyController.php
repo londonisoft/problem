@@ -27,8 +27,26 @@ class PropertyController extends Controller
 
 	public function getLatLon () {
 		try{
+
             $query = Property::select('lat','lon');
             $services = $query->get();
+			$data = []; 
+
+			foreach ($services as $key=>$service) {
+				$tmpData = [
+							"type" => "Feature",
+							"geometry" => [
+								"type" => "Point",
+								"coordinates" => [(float)$service->lat, (float)$service->lon]
+							],
+							"properties" => [
+								"type" => "event",
+							]
+						];
+				$data [$key] = $tmpData;
+			}
+
+
 
         }catch (\Exception $error) {
             return response()->json([
@@ -40,7 +58,7 @@ class PropertyController extends Controller
 
         return response()->json([
             'status_code' => 200,
-            'data'        => $services,
+            'features'        => $data,
         ]);
 	}
 
