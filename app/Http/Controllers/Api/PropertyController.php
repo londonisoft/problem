@@ -37,7 +37,7 @@ class PropertyController extends Controller
 							"type" => "Feature",
 							"geometry" => [
 								"type" => "Point",
-								"coordinates" => [(float)$service->lat, (float)$service->lon]
+								"coordinates" => [(float)$service->lon, (float)$service->lat]
 							],
 							"properties" => [
 								"type" => "event",
