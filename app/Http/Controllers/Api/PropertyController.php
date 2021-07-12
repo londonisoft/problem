@@ -30,16 +30,7 @@ class PropertyController extends Controller
 
             $query = Property::select('id','lat','lon','address', 'title');
 
-			if ($request->ids) {
-				$area = explode(',', $request->ids);
-				foreach($area as $key => $element) {
-					if($key == 0) {
-						$query->where('ids', $element);
-					} else {
-						$query->orWhere('ids', $element);
-					}
-				}
-            }
+			
 
             $services = $query->get();
 			$data = []; 
@@ -156,6 +147,16 @@ class PropertyController extends Controller
 						$query->where('baths', $element);
 					} else {
 						$query->orWhere('baths', $element);
+					}
+				}
+            }
+			if ($request->ids) {
+				$area = explode(',', $request->ids);
+				foreach($area as $key => $element) {
+					if($key == 0) {
+						$query->where('id', $element);
+					} else {
+						$query->orWhere('id', $element);
 					}
 				}
             }
