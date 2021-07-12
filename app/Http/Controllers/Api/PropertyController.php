@@ -188,9 +188,9 @@ class PropertyController extends Controller
                 $query->whereBetween('area', [$request->areaFrom, $request->areaTo]);
             } */
 
+			$services2 = $query->get();
             $services = $query->paginate(config('app.perPage'));
 
-			$services2 = $query->get();
 			$data = []; 
 
 			foreach ($services2 as $key=>$service) {
