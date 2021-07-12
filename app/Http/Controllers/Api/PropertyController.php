@@ -127,6 +127,16 @@ class PropertyController extends Controller
 					$query->whereBetween('price', [$from, $to]);
 				}
             }
+            if ($request->beds) {
+				$area = explode(',', $request->beds);
+				foreach($area as $key => $element) {
+					if($key == 0) {
+						$query->where('beds', $element);
+					} else {
+						$query->orWhere('beds', $element);
+					}
+				}
+            }
             if ($request->baths) {
 				$area = explode(',', $request->baths);
 				foreach($area as $key => $element) {
@@ -140,9 +150,9 @@ class PropertyController extends Controller
             if ($request->division_id) {
                 $query->where('division_id', $request->division_id);
             }
-            if ($request->beds) {
-                $query->where('beds', $request->beds);
-            }
+            // if ($request->beds) {
+            //     $query->where('beds', $request->beds);
+            // }
             if ($request->keywords) {
                 $query->where('title', 'like', '%' . $request->keywords . '%')
                     ->orWhere('bn_title', 'like', '%' . $request->keywords . '%')
