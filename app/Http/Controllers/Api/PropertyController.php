@@ -25,10 +25,22 @@ class PropertyController extends Controller
 {
 
 
-	public function getLatLon () {
+	public function getLatLon (Request $request) {
 		try{
 
             $query = Property::select('id','lat','lon','address', 'title');
+
+			if ($request->ids) {
+				$area = explode(',', $request->ids);
+				foreach($area as $key => $element) {
+					if($key == 0) {
+						$query->where('ids', $element);
+					} else {
+						$query->orWhere('ids', $element);
+					}
+				}
+            }
+
             $services = $query->get();
 			$data = []; 
 
@@ -76,7 +88,7 @@ class PropertyController extends Controller
 	
     public function index(Request $request) {
         try{
-            $query = Property::select('id','price','title','bn_title','district_id','division_id','thana_id','garage','balcony','address_bn','address','beds','baths','sqft','created_at')->with('images:property_id,image,image_type_id');
+            $query = Property::select('id','price','title','bn_title','district_id','division_id','thana_id','garage','balcony','address_bn','address','beds','baths','sqft','lon', 'lat', 'created_at')->with('images:property_id,image,image_type_id');
             if ($request->filled('sortBy')) {
                 if ($request->sortBy == 1) {
                     $query->orderBy('created_at', 'desc');
@@ -178,6 +190,27 @@ class PropertyController extends Controller
 
             $services = $query->paginate(config('app.perPage'));
 
+			$services2 = $query->get();
+			$data = []; 
+
+			foreach ($services2 as $key=>$service) {
+				$tmpData = [
+							"type" => "Feature",
+							"geometry" => [
+								"type" => "Point",
+								"coordinates" => [(float)$service->lon, (float)$service->lat]
+							],
+							"properties" => [
+								"id" => $service->id,
+								"title" => $service->title,
+								"title" => $service->title,
+								"address" =>  $service->address,
+							]
+						];
+				$data [$key] = $tmpData;
+			}
+
+
         }catch (\Exception $error) {
             return response()->json([
                 'status_code'   => false,
@@ -189,6 +222,7 @@ class PropertyController extends Controller
         return response()->json([
             'status_code' => 200,
             'data'        => $services,
+            'data2'        => ['features'=> $data]
         ]);
     }
 
