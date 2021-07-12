@@ -128,7 +128,14 @@ class PropertyController extends Controller
 				}
             }
             if ($request->baths) {
-                $query->where('baths', $request->baths);
+				$area = explode(',', $request->baths);
+				foreach($area as $key => $element) {
+					if($key == 0) {
+						$query->where('baths', $element);
+					} else {
+						$query->orWhere('baths', $element);
+					}
+				}
             }
             if ($request->division_id) {
                 $query->where('division_id', $request->division_id);
